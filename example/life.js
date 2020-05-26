@@ -63,7 +63,7 @@ const setupQuad = regl({
   }`,
 
   attributes: {
-    position: [ -4, -4, 4, -4, 0, 4 ]
+    position: [-4, -4, 4, -4, 0, 4]
   },
 
   uniforms: {
@@ -75,7 +75,10 @@ const setupQuad = regl({
   count: 3
 })
 
+let skipFrame = 0;
 regl.frame(() => {
+  if (skipFrame++ % 2)
+    return;
   setupQuad(() => {
     regl.draw()
     updateLife()
